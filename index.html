@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html>
+  <head style="margin:0;padding:0">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="fullpage.js"></script>
+    <link rel="stylesheet" type="text/css" href="fullpage.css" />
+    <link rel="stylesheet" type="text/css" href="massshootings.css" />
+  </head>
+  <body style="margin:0; padding:0">
+    <div id="all">
+      <div id="introductionPage" class="section" data-anchor="intropg">
+        <div id="intro" style="text-align:center">
+          <h1>US Mass Shootings 2013-2018</h1>
+          <p class="content">
+            A visualization narrative by Vibhor Jain (vibhorj2@illinois.edu)
+          </p>          
+        </div>
+      </div>
+      <div id="Slide-about" class="section" data-anchor="aboutpg">
+        <div class="content">
+          <h1>About the Visualization</h1>
+          <p class="content">
+            This narrative visualization uses the
+            <span class="textHighlight">Interactive Slideshow</span> approach to
+            take you through a visual journey of the Mass shooting from 
+            2013 to 2018 in the US.
+          </p>
+          <p class="content"><span class="textHighlight">The Dataset</span></p>
+          <p class="content">
+            The Mass shooting dataset was acquired from https://www.gunviolencearchive.org/ 
+            in the month of June 2019. The data was originally prepared by inspecting the data 
+            and then using Tableau to narrow the datasets to data pertaining to year 2013-18 
+            and summarization.
+          </p>
+          <p class="content"><span class="textHighlight">Scenes</span></p>
+          <p class="content">
+            A consistent and cohensive template was built using CSS layout and
+            FullPage.js to set up the scenes for this visual story. Scene
+            transition follows an intuitive approach of sliding up and down via
+            mouse wheel, touch or key-up/down. Slide navigator, along with
+            tool-tip located at the right side of each slide provides a good
+            navigation visual cue. It also acts as a trigger allowing readers to
+            jump to a specific slide.
+          </p>
+          <p class="content"><span class="textHighlight">Annotations</span></p>
+          <p class="content">
+            Annotations were used to show the high and low points of people
+            injured. These call-outs are to effectively paint the situation across US
+            in the 7 years and the rapidly increasing fatalities.
+          </p>
+          <p class="content">
+            <span class="textHighlight">Tooltips & Visual Aids</span>
+          </p>
+          <p class="content">
+            Following elements are use for better visualization:
+            <ul>
+                <li>Hover over the line on the line charts to bring up the data label tooltip</li>
+                <li>Axes of all line chars are clearly labeled</li>
+                <li>Each data point in the bubble chart is clearly labeled with tooltip</li>
+            </ul>
+          </p>
+          <p class="content"><span class="textHighlight">Parameters</span></p>
+          <p class="content">
+              City location served as the main parameter for the Number of People injured in the bubble chart. This helps the readers to inspect the crime distribution by the State and the City. These US states listed show the cities where Mass Shootings have happened and the number of people injured in those unfortunate events. These cities are distributed all across US as can be seen from the Bubble Chart. Readers are able to use the State dropdown to highlight the cities in the bubble chart to further inspect which states have how many cities. There is a tooltip on hover of each of the bubble which provides the city, state and the number of people injured. Line charts also provide two respective parameters: Number of People Injured vs Number of Incidents to allow readers to switch betwee the relevant charts.
+          </p>
+          <p class="content"><span class="textHighlight">Triggers</span></p>
+          <p class="content">
+              Buttons were used on both set of line charts to trigger the display of a proper chart (Number Of Incidents vs Number of People Injured). The State selection serves as the mechanism to trigger the highlights of cities based on the selected State. Data tooltips appear upon mouse over event on all the charts. The use of the Full page templates, helps user to jump to a specific slide or scroll between them.
+          </p>
+        </div>
+      </div>
+      <div id="Slide-InjuredByYear" class="section" data-anchor="injuredbyyrpg">
+        <h1>Injured vs Incidents by year</h1>
+        <div style="left:50px;position:relative">
+          <div style="top:100px;left:700px;width:370px;position:absolute">
+            <p class="content">
+              <span class="textHighlight">2013-2018:</span><br />Period of increasing Mass shootings.
+              Number of incidents has only grown 50% but number of People Injured has doubled showing that the Mass shootings are becoming more fatal.<br/><br />
+              <span class="textHighlight">2017:</span><br />Mass shootings peaked.
+              <br /><br />
+              <span class="textHighlight">2018:</span><br />First sign of
+              decreasing casualties. Number of Casualities decreased from previous year.<br /><br />
+              <span class="textHighlight">2013 - Current:</span><br />Upward
+              trend of Number of mass shootings and number of people getting injured. <br /><br />
+            </p>
+          </div>
+          <div style="top:450px;left:700px;width:550px;position:absolute">
+            <p class="content">
+              Number of pople affected via mass shootings has been increasing at an alarming pace
+              seeing the lowest Number of People injured in <span class="textHighlight">2013 at 964</span> almost doubling in a span of 4 years in 2017.
+              
+            </p>
+          </div>
+          <button id="btnInjuredByYr" class="button on">Injured By Year</button>&nbsp;<button id="btnIncidentsByYr" class="button">No of Incidents By Year</button><br />
+          <svg id="injuredByYr"></svg>
+          <svg id="countOfIncidentsByYr" style="display: none"></svg><br />
+          <i>(note:hover over the line to inspect the data)</i>
+        </div>
+      </div>
+
+      <div id="Slide-Scatter" class="section" data-anchor="scatterpg">
+        <h1>Hot spots for Mass shootings!</h1>
+        <div style="left:100px;position:relative">
+          <span class="textHighlight"> State:</span>
+          <select id="selGeo">
+            <option value="All">All</option>
+            <option value="Ohio">Ohio</option>
+            <option value="Missouri">Missouri</option>
+            <option value="Louisiana">Louisiana</option>
+            <option value="Nevada">Nevada</option>
+            <option value="Maryland">Maryland</option>
+            <option value="Florida">Florida</option>
+            <option value="Colorado">Colorado</option>
+            <option value="Pennsylvania">Pennsylvania</option>
+            <option value="North Carolina">North Carolina</option>
+            <option value="Wisconsin">Wisconsin</option>
+            <option value="California">California</option>
+            <option value="New York">New York</option>
+            <option value="Tennessee">Tennessee</option>
+            <option value="Alabama">Alabama</option>
+            <option value="Texas">Texas</option>
+            <option value="Indiana">Indiana</option>
+            <option value="Arkansas">Arkansas</option>
+            <option value="New Mexico">New Mexico</option>
+            <option value="Arizona">Arizona</option>
+            <option value="Minnesota">Minnesota</option>
+            <option value="Michigan">Michigan</option>
+            <option value="New Jersey">New Jersey</option>
+            <option value="Illinois">Illinois</option>
+            <option value="Washington">Washington</option>
+            <option value="Georgia">Georgia</option>
+            <option value="South Carolina">South Carolina</option>
+            <option value="Oklahoma">Oklahoma</option>
+            <option value="District of Columbia">District of Columbia</option>
+            <option value="Virginia">Virginia</option>
+            <option value="Delaware">Delaware</option>
+            <option value="Connecticut">Connecticut</option>
+            <option value="Kansas">Kansas</option>
+            <option value="Massachusetts">Massachusetts</option>
+            <option value="Nebraska">Nebraska</option>
+            <option value="Mississippi">Mississippi</option>
+          </select>
+          <br />
+          (hover over the bubble to inspect 2018 Number of People injured in which City)
+          <br />
+          <div style="top:0px;left:700px;width:550px;position:absolute">
+            <p class="content">
+              The Mass shooting phenomenon is not localised to one particular area of the US.
+              We can clearly see that this is a nation-wide phenomenon. However there are few states
+              which have higher number of cities affected. For e.g. user can select the state of Illinois or California
+              and see that the number of cities affected are much higher than others in general. The size of the bubble
+              is proportional to the number of people injured so 2 biggest circles Trenton and Santa Fe are specifically standing out.
+              Reader can hover over the circles and see more details in the tooltip.
+              <br />
+              <br />
+              <span class="textHighlight"
+                >Major Cities with highest Number of injured:</span
+              >
+              <br />
+              <span class="textHighlight">Chicago,Memphis,Saint Louis,Philadelphia: </span>118,33,32,30<br/><br />              
+              <span class="textHighlight">Illinois: </span>Chicago, Aurora
+              <br /><br />
+              <span class="textHighlight">Tennessee: </span>Memphis, Jackson, Covington<br /><br />
+              <span class="textHighlight">Missouri: </span>Saint Louis, Sprinfield, Kansas City<br />
+            </p>
+          </div>
+          <svg id="citiesByPeopleInjured" style="display:block"></svg>
+        </div>
+      </div>
+
+      <div id="Slide-References" class="section" data-anchor="referencepg">
+        <div class="content">
+          <h1>References</h1>
+          <p class="content"><span class="textHighlight">Github Repo</span></p>
+          <p class="content">
+            <a
+              style="color:white"
+              target="_blank"
+              href="https://github.com/vibjain/vibjain.github.io"
+              >https://github.com/vibjain/vibjain.github.io</a
+            >
+          </p>
+          <br />
+          <p class="content"><span class="textHighlight">The Dataset</span></p>
+          <p class="content">
+                The Mass shooting dataset was acquired from
+            <a
+              target="_blank"
+              style="color:white"
+              href="https://www.gunviolencearchive.org/"
+              >Gun violence archive </a
+            >, in the month of June 2019. The data was originally prepared by inspecting the data 
+            and then using Tableau to narrow the datasets to data pertaining to year 2013-18 
+            and summarization.
+          </p>
+          <br />
+          <p class="content">
+            <span class="textHighlight">Background Image</span>
+          </p>
+          <p class="content">
+            Crime Scene do not enter signage:
+            <a
+              style="color:white"
+              target="_blank"
+              href="https://www.pexels.com/photo/crime-scene-do-not-cross-signage-923681/">https://www.pexels.com/photo/crime-scene-do-not-cross-signage-923681/</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+    <script>
+      
+            new fullpage('#all', {
+            licenseKey: "OPEN-SOURCE-GPLV3-LICENSE",
+            autoScrolling:true,
+            scrollHorizontally:true,
+            navigation:true,
+            navigationPosition: 'right',
+            anchors:["intropg","aboutpg","injuredbyyrpg","scatterpg","referencepg"],
+            navigationTooltips:['Introduction','About Vizualization','Injured by year','Hot cities for Mass shootings!','References'],
+            slidesNavPosition:"left",
+            keyboardScrolling:true,
+            
+            sectionsColor: ['black','black','black','black','black','black'],
+            loopBottom:true,
+        });
+        
+        //
+        // Selection trigger: City Direction
+        //
+        d3.select("#selGeo").on('change', function(d,i)
+            {
+              var sel = d3.select(this).property('value');
+
+              if (sel == "All")
+              {
+              var bub = document.querySelectorAll(".circle1");
+              bub.forEach(function(c) {document.getElementById(c.id).style.opacity = "0.4";
+                                      document.getElementById(c.id).style.transition = "opacity 0.9s"});
+              }
+              else
+              {
+                
+                var bub = document.querySelectorAll(".circle1");
+                bub.forEach(function(c) {document.getElementById(c.id).style.opacity = "0.4";
+                                      document.getElementById(c.id).style.transition = "opacity 0.9s"});
+
+                bub = document.querySelectorAll('.'+sel);
+                bub.forEach(function(c) {
+                  document.getElementById(c.id).style.opacity = "1";
+                                      document.getElementById(c.id).style.transition = "opacity 0.9s"});
+              }
+            }
+        );
+
+        var colorscheme = d3.scaleOrdinal(d3.schemeCategory20c);
+
+        var parseDate = d3.timeParse("%m/%d/%Y")
+        var bisectDate = d3.bisector(function(d) { return d.date; }).left;
+        var formatValue = d3.format(",.0f");
+        var formatCurrency = function(d) { return "$" + formatValue(d); };
+
+        var dataset;
+
+        var chartWidth = 760,
+            chartHeight = 600,
+            bubbleWidth = 760,
+            bubbleHeight = 720;
+
+            var injuredByYrLC = d3.select("#injuredByYr")
+            .attr("width", chartWidth)
+            .attr("height",chartHeight);
+
+            var countOfIncidentsLC = d3.select("#countOfIncidentsByYr")
+            .attr("width", chartWidth)
+            .attr("height",chartHeight);
+
+            var citiesByPeopleInjuredBC = d3.select("#citiesByPeopleInjured")
+            .attr("width", bubbleWidth)
+            .attr("height",bubbleHeight);
+
+            var pack = d3.pack()
+            .size([bubbleWidth, bubbleHeight])   
+            .padding(1.5);
+
+        var margin = {top: 60, right: 80, bottom: 30, left: 50},
+            width = +chartWidth - margin.left - margin.right,
+            height = +chartHeight - margin.top - margin.bottom;
+
+
+    //Load Count of Incidents by Year for year 2013-2018
+    function loadCountOfIncidentsByYear()
+    {
+        d3.csv("data/Injured_By_Year_data.csv",
+         function(d) {
+                return {
+                    date: d3.timeParse("%Y")(d.YearofIncidentDate),
+                    incidents: +d.CountofIncident
+                };
+
+              }, function(data) { drawCountOfIncidentsByYearLC(data) }
+
+        );
+    }
+
+    //Load Count of People injured by Year for year 2013-2018
+    function loadInjuredByYear()
+    {
+        d3.csv("data/Injured_By_Year_data.csv",
+         function(d) {           
+                return {
+                    date: d3.timeParse("%Y")(d.YearofIncidentDate),                    
+                    NoInjured: +d.NoInjured
+                };
+
+              }, function(data) { drawInjuredByYear(data) }
+        );
+    }
+
+    //
+    // Button - to display No of Injured vs Number of Incidents over the years
+    //
+        d3.select("#btnInjuredByYr").on("click", function(d,i)
+        {
+            //
+            var style = document.getElementById("injuredByYr").style.display;
+            if(style === "none")
+                {
+                    document.getElementById("injuredByYr").style.display = "block";
+                    document.getElementById("injuredByYr").style.textAlign = "center";
+                    document.getElementById("btnInjuredByYr").className = "button on";
+                    document.getElementById("countOfIncidentsByYr").style.display = "none";
+                    document.getElementById("btnIncidentsByYr").className = "button";
+                }
+        });
+
+        d3.select("#btnIncidentsByYr").on("click", function(d,i)
+        {
+            var style = document.getElementById("countOfIncidentsByYr").style.display;
+            if(style === "none")
+                {
+                    document.getElementById("injuredByYr").style.display = "none";
+                    document.getElementById("btnIncidentsByYr").className = "button on";
+                    document.getElementById("countOfIncidentsByYr").style.display = "block";
+                    document.getElementById("countOfIncidentsByYr").style.textAlign = "center";
+                    document.getElementById("btnInjuredByYr").className = "button";
+                }
+        });
+
+        
+    function drawInjuredByYear(dataset)
+    {
+        var x = d3.scaleTime()
+                .rangeRound([0,width]);
+
+        var y = d3.scaleLinear()
+                .rangeRound([height,0]);
+
+        var line = d3.line()
+                .x(function(d) {return x(d.date); })
+                  .y(function(d) {return y(d.NoInjured);} );
+
+        x.domain(d3.extent(dataset, function(d) {return d.date;}));
+        y.domain(d3.extent(dataset, function(d) {return d.NoInjured;}));
+
+        g = injuredByYrLC.append("g").attr("transform","translate("+margin.left+","+margin.top+")");
+
+        var path = g.append("path")
+                .datum(dataset)
+                .attr("class","line")
+                .attr("d",line);
+        
+
+        //lowest Injured
+        anIBYLow = g.append("text")
+            .attr("x", x(parseDate("01/01/2013")))
+            .attr("y", y(965)-50)
+            .attr("class","annotation")
+            .style("text-anchor", "right")
+            
+        anIBYLow.append("tspan")
+            .attr("x", x(parseDate("01/01/2013")))
+            .attr("dy","1.0em")
+            .text("Lowest Injured By Year");
+
+        anIBYLow.append("tspan")
+            .attr("x", x(parseDate("01/01/2013")))
+            .attr("dy","1.0em")
+            .text("964");
+
+        //highest Number of People injured annotation
+        anIBYHigh = g.append("text")
+            .attr("x", x(parseDate("01/01/2017"))-50)
+            .attr("y", y(1803))
+            .attr("class","annotation")
+            .style("text-anchor", "middle")
+        
+        anIBYHigh.append("tspan")
+            .attr("x", x(parseDate("01/01/2017"))-50)
+            .attr("dy","1.0em")
+            .text("Highest Injured by Year");
+
+        anIBYHigh.append("tspan")
+            .attr("x", x(parseDate("01/01/2017"))-50)
+            .attr("dy","1.0em")
+            .text("1803");
+        
+        g.append("g")
+            .attr("class","axWht")
+            .attr("transform","translate(0,"+height+")")
+            .call(d3.axisBottom(x))
+            .select(".domain")
+            .remove();
+
+        g.append("g")
+            .attr("class","axWht")
+            .call(d3.axisLeft(y))
+            .append("text")
+            .attr("class","axis")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("Number of People Injured");
+
+        var focus = g.append("g")
+                .attr("class", "focus")
+                .style("display", "none");
+
+        focus.append("circle")
+            .attr("r", 7.5);
+
+        focus.append("text")
+            .attr("class","datalabel")
+            .attr("x", 15)
+            .attr("dy", ".31em");
+
+            countOfIncidentsLC.append("rect")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .attr("class", "overlay")
+            .attr("width", width)
+            .attr("height", height)
+            .on("mouseover", function() { focus.style("display", null); })
+            .on("mouseout", function() { focus.style("display", "none"); })
+            .on("mousemove", mousemove);
+
+        // Show Tooltip
+        function mousemove() {
+        var x_point = x.invert(d3.mouse(this)[0]);
+            i = bisectDate(dataset, x_point);
+            d0 = dataset[i - 1];
+            d1 = dataset[i];
+            if (d0 != "undefined" && d1 != "undefined" )
+            {
+                //find the closer date value to x-cor of the mouse position
+                d = x_point - d0.date > d1.date - x_point ? d1 : d0;
+                focus.attr("transform", "translate(" + x(d.date) + "," + y(d.NoInjured) + ")");
+                focus.select("text").text(function() { return d.NoInjured; });
+            }
+        }
+    }
+
+    function drawCountOfIncidentsByYearLC(dataset)
+    {
+        //Line chart scale
+        var x = d3.scaleTime()
+                .rangeRound([0,width]);
+        
+        var y = d3.scaleLinear()
+                .rangeRound([height,0]);
+        
+        var line = d3.line()
+            .x(function (d) { return x(d.date); })
+                .y(function(d) {return y(d.incidents);} );
+
+        x.domain(d3.extent(dataset, function(d) {return d.date;}));
+        y.domain(d3.extent(dataset, function(d) {return d.incidents;}));
+
+        g = countOfIncidentsLC.append("g").attr("transform","translate("+margin.left+","+margin.top+")");
+
+        var path = g.append("path")
+                .datum(dataset)
+                .attr("class","line")
+                .attr("d",line);
+
+        g.append("g")
+            .attr("class","axWht")
+            .attr("transform","translate(0,"+height+")")
+            .call(d3.axisBottom(x))
+            .select(".domain")
+            .remove();
+
+        g.append("g")
+            .attr("class","axWht")
+            .call(d3.axisLeft(y))
+            .append("text")
+            .attr("class","axis")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .text("Number of incidents per year");
+
+        var focus = g.append("g")
+                .attr("class", "focus")
+                .style("display", "none");
+
+            focus.append("circle")
+                .attr("r", 7.5);
+
+            focus.append("text")
+                .attr("class","datalabel")
+                .attr("x", 15)
+                .attr("dy", ".31em");
+
+                countOfIncidentsLC.append("rect")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+                .attr("class", "overlay")
+                .attr("width", width)
+                .attr("height", height)
+                .on("mouseover", function() { focus.style("display", null); })
+                .on("mouseout", function() { focus.style("display", "none"); })
+                .on("mousemove", mousemove);
+
+            //Tooltips
+            function mousemove() {
+            var x_point = x.invert(d3.mouse(this)[0]),
+                i = bisectDate(dataset, x_point),
+                d0 = dataset[i - 1],
+                d1 = dataset[i],
+                // Find the closer date value to x-cor of the mouse position
+                d = x_point - d0.date > d1.date - x_point ? d1 : d0;
+            focus.attr("transform", "translate(" + x(d.date) + "," + y(d.incidents) + ")");
+            focus.select("text").text(function() { return formatValue(d.incidents)}); 
+        
+            }
+        }
+
+    //Load cities with the no of People injured
+    function loadCitiesPeopleInjured()
+    {
+        d3.csv("data/CityWiseData.csv",
+            function(d) {
+                    return {
+                            State: d.State,
+                            City_County: d.City_County,
+                            NoInjured: +d.NoInjured                                        
+                            };
+
+                }, function(data) {drawBubble(data) }
+            );        
+    }
+
+    //Draw bubble chart showing cities by max number of people injured
+    function drawBubble(dataset)
+    {  
+        var root = d3.hierarchy({children: dataset})
+            .sum(function(d) { return d.NoInjured; });
+        
+        var node = citiesByPeopleInjuredBC.selectAll(".node")
+            .data(pack(root).leaves())
+            .enter().append("g")
+            .attr("class", "node")
+            .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+        node.append("title")
+                    .text(function(d) {
+                        return d.data.City_County + " (" + d.data.State + ")" + "\n" + "Injured #: "+d.data.NoInjured;
+                    });
+
+        node.append("circle")
+            .attr("id", function(d) { return "bubble-" + d.data.City_County + "-" + d.data.State; })
+            .attr("r", function(d) { return d.r ; })
+            .attr("class", function(d) { return "circle1 " + d.data.State })
+            .attr("opacity", function(d){return 0.4;})
+            .style("fill", function(d,i) { return colorscheme(i); });
+
+        node.append("text")
+            .attr("id", function(d) { return "bubble-txt-"  + d.data.City_County + "-" + d.data.State; })
+                    .attr("dy", "0.5em")
+                    .style("text-anchor", "middle")
+                    .text(function(d) {
+                        return d.data.City_County;
+                    })
+                    .attr("class", "bubble")
+                    .attr("font-size", function(d){
+                        return d.r/4;
+                    });
+    }
+
+    loadInjuredByYear();
+    loadCountOfIncidentsByYear();
+    loadCitiesPeopleInjured();
+
+    </script>
+  </body>
+</html>
