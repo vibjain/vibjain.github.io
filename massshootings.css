@@ -15,6 +15,14 @@ h1 {
     stroke: white;
 }
 
+.bar {
+    fill: steelblue;
+}
+
+.highlight {
+    fill: #feda6a;
+}
+
 .axWht path {
     stroke: white;
 }
