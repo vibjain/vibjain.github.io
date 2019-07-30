@@ -366,10 +366,8 @@
                 .call(d3.axisBottom(x))
                 .append("text")
                 .attr("y", chartHeight - 250)
-                .attr("x", chartWidth - 100)
-                .attr("text-anchor", "end")
-                .attr("stroke", "white")
-                .text("City");
+                .attr("x", chartWidth - 100);
+                
 
             g.append("g").attr("class", "axWht")
                 .call(d3.axisLeft(y).tickFormat(function (d) {
